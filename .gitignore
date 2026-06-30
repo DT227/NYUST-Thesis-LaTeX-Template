@@ -1,0 +1,22 @@
+# === LaTeX 暫存檔與輔助檔 ===
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.idx
+*.ilg
+*.ind
+*.lof
+*.lot
+*.out
+*.run.xml
+*.toc
+*.synctex.gz
+*.log
+
+# === 編輯器與作業系統暫存檔 ===
+.vscode/
+.DS_Store
+Thumbs.db

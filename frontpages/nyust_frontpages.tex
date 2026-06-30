@@ -1,19 +1,12 @@
-%
-% this file is encoded in utf-8
-% v1.7
-% do not change the content of this file
-% unless the thesis layout rule is changed
 % 無須修改本檔內容，除非校方修改了
 % 封面、書名頁、中文摘要、英文摘要、誌謝、目錄、表目錄、圖目錄、符號說明
 % 等頁之格式
-% this file is encoded in utf-8
-%v1.7
+
 
 % make the line spacing in effect
 \renewcommand{\baselinestretch}{\mybaselinestretch}
 \large % it needs a font size changing command to be effective
 
-% default variables definitions
 % 注意！！此處只是預設值，不需更改此處
 % 請更改 my_names.tex 內容
 \newcommand\cTitle{論文題目}
@@ -39,7 +32,6 @@
 \newcommand\cYear{九十四}
 \newcommand\cMonth{六}
 \newcommand\cDay{十}
-%\newcounter{eYear}
 \newcommand\eYear{2006}
 \newcommand\eMonth{June}
 \newcommand\ePlace{Chungli, Taoyuan, Taiwan}
@@ -49,14 +41,15 @@
 \input{frontpages/my_names.tex}
 \newcommand\itsempty{}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%       ntust cover 封面
+%       nyust cover 封面
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
+%!!!!!!建議直接使用雲科提供的word範本，這邊LaTeX無法調整到一模一樣!!!!!!
 \begin{titlepage}
 
 % no page number
 % next page will be page 1
-\newgeometry{top=3cm, bottom=3cm, left=2.5cm, right=2.5cm}
+\newgeometry{top=3cm, bottom=3cm, left=3cm, right=3cm}
 % aligned to the center of the page
 \begin{center}
 % font size (relative to 12 pt):
@@ -64,45 +57,46 @@
 %
 
 \centering
-\LARGE{\univCname}\\
+\Large{\univCname}\\
 %\vspace{0.5cm}
 %\hfill
-\LARGE{\degreeCname 論文}\\
+\Large{\degreeCname 論文}\\
 \vspace{0.3cm}
 \Large{\univdepartmentEname }\\
-\LARGE{\univEname }\\
+\Large{\univEname }\\
 %\makebox[8cm][s]{\textbf{\Huge{\degreeCname 論文（初稿）}}}\\ %顯示論文種類 (中文)
 
-\vspace{1.7cm}
+\vspace{40pt}
 %\large % it needs a font size changing command to be effective
-\LARGE{\cTitle}\\  % 中文題目
+\Large{\cTitle}\\  % 中文題目
 %
-\vspace{0.5cm}
+%\vspace{0.5cm}
 %
-\LARGE{\eTitle}\\ %英文題目
-\vspace{3cm}
+\Large{\eTitle}\\ %英文題目
+\vspace{60pt}
 % \makebox is a text box with specified width;
 % option s: stretch
 % use \makebox to make sure
 % 「研究生：」 與「指導教授：」occupy the same width
-\LARGE{\myCname}\\
-\LARGE{\myEname}\\
-\vspace{1.5cm}
+\Large{\myCname}\\
+\Large{\myEname}\\
+\vspace{36pt}
 
-\LARGE 指導教授：  \LARGE{\advisorCnameA} \\
-\LARGE Advisor:  \LARGE{\advisorEnameA} \\[1em]
+\Large 指導教授：  \Large{\advisorCnameA} \\
+\Large Advisor:  \Large{\advisorEnameA} \\[1em]
 % 判斷是否有 B 教授
 \ifx \advisorCnameB \itsempty \else
-    & \makebox[4cm][l]{\LARGE{\advisorCnameB}} \\[1em]
+    & \makebox[4cm][l]{\Large{\advisorCnameB}} \\[1em]
 \fi
     
 % 判斷是否有 C 教授
 \ifx \advisorCnameC \itsempty \else
-    & \makebox[4cm][l]{\LARGE{\advisorCnameC}} \\[1em]
+    & \makebox[4cm][l]{\Large{\advisorCnameC}} \\[1em]
 \fi
 
-\LARGE{中華民國\cYear 年\cMonth 月}\\
-\LARGE{ \eMonth  }\LARGE{\ } \LARGE{\eYear }
+\vspace{27pt}
+\Large{中華民國\cYear 年\cMonth 月}\\
+\Large{ \eMonth  }\Large{\ } \Large{\eYear }
 %
 \end{center}
 % Resume the line spacing to the desired setting
@@ -116,7 +110,7 @@
 %% 從摘要到本文之前的部份以小寫羅馬數字印頁碼
 % 但是從「書名頁」(但不印頁碼) 就開始計算
 %\setcounter{page}{1}
-\pagenumbering{Roman}
+\pagenumbering{roman}
 %\pagenumbering{arabic}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %       指導教授推薦書 
@@ -270,6 +264,7 @@
 %\thispagestyle{plain}  % 無 header，但在浮水印模式下會有浮水印
 
 % create an entry in table of contents for 中文摘要
+\phantomsection
 \addcontentsline{toc}{chapter}{\nameCabstract}
 \fancypagestyle{plain}{\pagestyle{fancy}}
 % aligned to the center of the page
@@ -324,7 +319,7 @@
 %\vspace{0.83cm}
 %\vfill
 
-\makebox[1.5cm][s]{\textbf{\large{摘要}}}\\
+\makebox[1.5cm][c]{\textbf{摘要}}\\
 \end{center}
 % Resume the line spacing to the desired setting
 \renewcommand{\baselinestretch}{\mybaselinestretch}   %恢復原設定
@@ -343,6 +338,7 @@
 \thispagestyle{plain}  % 無 header，但在浮水印模式下會有浮水印
 
 % create an entry in table of contents for 英文摘要
+\phantomsection
 \addcontentsline{toc}{chapter}{\nameEabstract}
 
 % aligned to the center of the page
@@ -403,7 +399,7 @@
 %\vspace{0.83cm}
 %\vfill
 %
-\textbf{\large{Abstract}}\\
+\textbf{\large{ABSTRACT}}\\
 %\vspace{0.5cm}
 \end{center}
 % Resume the line spacing the desired setting
@@ -420,19 +416,27 @@
 %
 % Acknowledgment
 \newpage
-\chapter*{\protect\makebox[1cm][s]{\large{\nameAckn}}} %\makebox{} is fragile; need protect
-
+\phantomsection
 \addcontentsline{toc}{chapter}{\nameAckn}
+
+\chapter*{\protect\makebox[5cm][c]{\large{\nameAckn}}} %\makebox{} is fragile; need protect
+
 \input{frontpages/my_ackn.tex}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %       目錄 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % Table of contents
-
 \newpage
-\renewcommand{\contentsname}{\protect\makebox[1cm][s]{\nameToc}}
+\phantomsection % 放船錨與寫入目錄，必須要在 \tableofcontents 之前！
+\addcontentsline{toc}{chapter}{\nameToc}
+
+% 1. 先把真正的粗體指令備份為 \realbfseries
+\let\realbfseries\bfseries
+% 2. 在標題中使用備份的粗體指令
+\renewcommand{\contentsname}{\protect\makebox[1cm][s]{\protect\realbfseries\nameToc}}
 { 
   % 1. 開啟一個群組 (大括號)，限制修改範圍只在目錄頁有效
   
@@ -444,9 +448,7 @@
   \tableofcontents
   
 }
-%\makebox{} is fragile; need protect
-\addcontentsline{toc}{chapter}{\nameToc}
-%\tableofcontents
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %       表目錄 
@@ -455,13 +457,16 @@
 % List of Tables
 \newcommand{\lotlabel}{表}
 \newpage
+\phantomsection
+\addcontentsline{toc}{chapter}{\nameLot}
+
 \renewcommand{\numberline}[1]{\lotlabel~#1\hspace*{1em}}
-\renewcommand{\listtablename}{\protect\makebox[1.5cm][s]{\nameLot}}
+\renewcommand{\listtablename}{\protect\makebox[1.5cm][s]{\protect\realbfseries\nameLot}}
 { \let\bfseries\mdseries 
   \listoftables 
 }
 %\makebox{} is fragile; need protect
-\addcontentsline{toc}{chapter}{\nameLot}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %       圖目錄 
@@ -470,24 +475,15 @@
 % List of Figures
 \newcommand{\loflabel}{圖}
 \newpage
+\phantomsection
+\addcontentsline{toc}{chapter}{\nameTof}
+
 \renewcommand{\numberline}[1]{\loflabel~#1\hspace*{1em}}
-\renewcommand{\listfigurename}{\protect\makebox[1.5cm][s]{\nameTof}}
+\renewcommand{\listfigurename}{\protect\makebox[1.5cm][s]{\protect\realbfseries\nameTof}}
 { \let\bfseries\mdseries 
   \listoffigures
 }
 %\makebox{} is fragile; need protect
-\addcontentsline{toc}{chapter}{\nameTof}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%       演算法目錄 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% List of Figures
-%\newpage
-%\renewcommand{\listalgorithmname}{\protect\makebox[5cm][s]{\nameToa}}
-%\makebox{} is fragile; need protect
-%\addcontentsline{toc}{chapter}{\nameToa}
-%\listofalgorithms
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -497,22 +493,24 @@
 % Symbol list
 % define new environment, based on standard description environment
 % adapted from p.60~64, <<The LaTeX Companion>>, 1994, ISBN 0-201-54199-8
-%\newcommand{\SymEntryLabel}[1]%
-% {\makebox[3cm][l]{#1}}
+\newcommand{\SymEntryLabel}[1]%
+{\makebox[3cm][l]{#1}}
+
+\newenvironment{SymEntry}
+  {\begin{list}{}%
+      {\renewcommand{\makelabel}{\SymEntryLabel}%
+       \setlength{\labelwidth}{3cm}%
+       \setlength{\leftmargin}{\labelwidth}%
+       }%
+  }%
+  {\end{list}}
 %
-%\newenvironment{SymEntry}
-%   {\begin{list}{}%
-%       {\renewcommand{\makelabel}{\SymEntryLabel}%
-%        \setlength{\labelwidth}{3cm}%
-%        \setlength{\leftmargin}{\labelwidth}%
-%        }%
-%   }%
-%   {\end{list}}
-%%
-%\newpage
-%\chapter*{\protect\makebox[5cm][s]{\nameSlist}} %\makebox{} is fragile; need protect
-%\addcontentsline{toc}{chapter}{\nameSlist}
-%\input{frontpages/my_symbols.tex}
+\newpage
+\phantomsection
+\addcontentsline{toc}{chapter}{\nameSlist}
+
+\chapter*{\protect\makebox[5cm][c]{\nameSlist}} %\makebox{} is fragile; need protect
+\input{frontpages/my_symbols.tex}
 
 
 \newpage

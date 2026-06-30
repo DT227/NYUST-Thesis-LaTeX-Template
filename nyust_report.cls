@@ -1,8 +1,8 @@
 %%
-%% This is file `yzu_report.cls',
+%% This is file `nyust_report.cls',
 %% based on 'report.cls'.
 %%
-%%[npc] modification begins at line 380
+%% [npc] modification begins at line 392
 %%
 %% the following two commands are place-holder
 %% \newcommand\prechaptername{Chapter}
@@ -17,14 +17,19 @@
 %%       chapter heading now using \LARGE rather than \huge
 %%       chapter heading is now followed by \vskip 20\p@, rather than 40\p@
 %%
-%% At line 398, disable the original \def\@makeschapterhead#1{%
+%% At line 410, disable the original \def\@makeschapterhead#1{%
 %% (for \chapter*)(used in 'table of contents') and modified them similar to 
 %% the regular \@makechapterhead
 %%
-%% At line 644, disable the original \l@chapter, for it does not make the
+%% At line 656, disable the original \l@chapter, for it does not make the
 %% chapter-level dotted toc line.  Replaced with the following:
 %%
 %% \newcommand*{\l@chapter}{\@dottedtocline{0}{0em}{1.4em}}
+%% 
+%% [YYT] Add new command at line 785 to support modifing IEEE bibliography style
+%% 
+%% \newcommand{\bstctlcite}
+%% 
 %% -------------- the following is the original comment in report.cls
 %% The original source files were:
 %%
@@ -777,6 +782,11 @@
 \else
   \onecolumn
 \fi
+\newcommand{\bstctlcite}[1]{\@bsphack
+  \@for\@citeb:=#1\do{%
+    \edef\@citeb{\expandafter\@firstofone\@citeb}%
+    \if@filesw\immediate\write\@auxout{\string\citation{\@citeb}}\fi}%
+  \@esphack}
 \endinput
 %%
-%% End of file `yzu_report.cls'.
+%% End of file `nyust_report.cls'.

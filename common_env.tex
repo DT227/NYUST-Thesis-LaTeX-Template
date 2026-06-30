@@ -1,137 +1,226 @@
-
-
-
 % 除非校方修改了論文格式 (margins, header, footer, 浮水印)
 % 或者需要增加所用的 LaTeX 套件，
 % 或者要改預設中文字型、編碼
 % 否則毋須修改本檔內容
 % 論文撰寫，請修改以 my_  開頭檔名的各檔案
 
+% =====================================================================
+% 1. 字型與基本中文設定 (CTeX)
+% =====================================================================
+\usepackage{fontspec}   % 設定字體 
+\usepackage{xeCJK}      % 讓中英文字體分開設置 
+\usepackage[UTF8,heading = true]{ctex}
+
+%設定主要字型，也就是英文字型
+\setmainfont[Mapping=tex-text]{Times New Roman}            
+%設定中文字型
+\setCJKmainfont[AutoFakeBold={4}]{DFKai-SB}
+\XeTeXlinebreaklocale "zh"                %這兩行一定要加，中文才能自動換行 
+\XeTeXlinebreakskip = 0pt plus 1pt        %這兩行一定要加，中文才能自動換行
+
+% 設定目錄顯示層級與標題編號層級
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
 
 
-\usepackage{titletoc}
-\usepackage[nospace]{cite}  % for smart citation
-\usepackage{geometry}  % for easy margin settings
-%\usepackage{enumitem}  % 加這行，讓清單支援進階設定
-\usepackage{subfigure}  % for subfigure
-\usepackage{multirow}
-%\usepackage[dvipdfm]{graphicx}  % for graphic   using eps
-\usepackage{graphicx}  % for graphic   using eps
+% =====================================================================
+% 2. 基礎排版、表格與工具套件 (必須在 hyperref 之前)
+% =====================================================================
+\usepackage{geometry}   % 頁邊距設定
+\usepackage{enumitem}   % 清單進階設定
+\usepackage{multirow}   % 表格合併儲存格
+\usepackage{diagbox}	  % 表格表頭畫斜線
+\usepackage{graphicx}   % 插入圖片
+\usepackage{lscape}     % 轉置表格
+\usepackage{subcaption} % 進階圖片標題設定
 
-%\usepackage{epstopdf} % 當使用pdflatex時打開，如使用latex則不需開啟，此功能為將xxx.eps 自動判讀為XXX.pdf
 
-%\usepackage{subfig} 
-\usepackage{algorithmic}  %演算法使用
-\usepackage{algorithm}
+% =====================================================================
+% 3. 數學與演算法套件 (必須在 hyperref 之前！否則公式與演算法超連結會壞掉)
+% =====================================================================
+\usepackage{amsmath}    % 各式 AMS 數學功能
+\usepackage{amssymb}    % 各式 AMS 數學符號
+\usepackage{mathrsfs}   % 草寫體數學符號，在數學模式裡用 \mathscr{E} 得草寫 E
+\usepackage{algorithmic}    % 演算法使用
+\usepackage{algorithm}      % 演算法環境
 
-%
-% margins setting
-\geometry{verbose,a4paper,tmargin=3cm,bmargin=3cm,lmargin=3cm,rmargin=3cm,footskip=2cm}
-%
-\usepackage{amsmath} % 各式 AMS 數學功能
-\usepackage{amssymb} % 各式 AMS 數學符號
-\usepackage{mathrsfs} %草寫體數學符號，在數學模式裡用 \mathscr{E} 得草寫 E
-\usepackage{listings} % 程式列表套件
-%
-% listing setting
-\lstset{breaklines=true,% 過長的程式行可斷行
-extendedchars=false,% 中文處理不需要 extendedchars
-texcl=true,% 中文註解需要有 TeX 處理過的 comment line, 所以設成 true
-comment=[l]\%\%,% 以雙「百分號」做為程式中文註解的起頭標記，配合 MATLAB
-basicstyle=\,% 小號字體, 約 10 pt 大小
-commentstyle=\upshape,% 預設是斜體字，會影響註解裏的英文，改用正體
-%language=Octave % 會將一些 octave 指令以粗體顯示
+
+% =====================================================================
+% 4. 程式碼列表套件 (listings) 
+% =====================================================================
+\usepackage{listings}   % 程式列表套件
+\lstset{
+    breaklines=true,            % 過長的程式行可斷行
+    extendedchars=false,        % 中文處理不需要 extendedchars
+    texcl=true,                 % 中文註解需要有 TeX 處理過的 comment line, 所以設成 true
+    comment=[l]\%\%,            % 以雙「百分號」做為程式中文註解的起頭標記，配合 MATLAB
+    basicstyle=\ttfamily\small, % 小號字體, 約 10 pt 大小
+    commentstyle=\upshape       % 預設是斜體字，會影響註解裏的英文，改用正體
+    %language=Octave            % 會將一些 octave 指令以粗體顯示
 }
 
-\usepackage{url} % 在文稿中引用網址，可以用 \url{http://www.ntust.edu.tw} 方式
 
-% 插圖套件 graphicx
-% 使用者工作流程是用 pdftex 還是 latex + dvipdfmx?
-% 視情況而有不同的參數
-% 這裡作自動判斷
-% 參考自
-% http://www.tex.ac.uk/cgi-bin/texfaq2html?label=ifpdf
-%\newcommand\mydvipdfmxflow{dvipdfmx}
-%\newcommand\mypdftexflow{pdftex}
-%
-%\ifx\pdfoutput\undefined
-%  % not running pdftex
-%  \usepackage[dvipdfm]{graphicx}
-%  \newcommand\myworkflow{dvipdfmx}  % set the flag for hyperref
-%\else
-%  \ifx\pdfoutput\relax
-%    % not running pdftex
-%    \usepackage[dvipdfm]{graphicx}
-%    \newcommand\myworkflow{dvipdfmx}  % set the flag
-%  \else
-%    % running pdftex, with...
-%    \ifnum\pdfoutput>0
-%      % ... PDF output
-%      \usepackage[pdftex]{graphicx}
-%      \newcommand\myworkflow{pdftex}  % set the flag
-%    \else
-%      %...DVI output
-%      \usepackage[dvipdfm]{graphicx}
-%      \newcommand\myworkflow{dvipdfmx}  % set the flag
-%    \fi
-%  \fi
-%\fi
+% =====================================================================
+% 5. 文獻引用與網址 (建議在 hyperref 之前)
+% =====================================================================
+\usepackage[nospace]{cite}  % 智慧文獻引用
+\usepackage{url}            % 在文稿中引用網址，可以用 \url{http://www.ntust.edu.tw} 方式
 
-\usepackage{fancyhdr}  % 借用增強功能型 header 套件來擺放浮水印 
-% (佔用了 central header)
-% 不需要浮水印的使用者仍可利用此套件，產生所需的 header, footer
-%
+
+% =====================================================================
+% 6. 目錄外觀修改 (titletoc 區塊，保持原樣，放於 hyperref 之前)
+% =====================================================================
+\usepackage{titletoc}
+\titlecontents{chapter}[0pt]
+  {\addvspace{-0.3em}\bfseries}         %【目錄行距】\addvspace 控制與上一行的垂直距離
+  {\thecontentslabel\ }                 % 保持原本的標號與間距（如：第一章 ）
+  {}
+  {\titlerule*[0.35pc]{.}\contentspage} %【點點間距】中括號內的數值越小，點點越緊密
+  []
+\titlecontents{section}[1.5em]          % 保持標準 Section 的左側縮排 (1.5em)
+  {\addvspace{-0.3em}}                  %【目錄行距】與 Chapter 設為相同，即可達成等距
+  {\thecontentslabel\ }                 % 保持原本的標號與間距（如：1.1 ）
+  {}
+  {\titlerule*[0.35pc]{.}\contentspage} %【點點間距】務必與 Chapter 保持一致
+  []
+\titlecontents{subsection}[3em]         % 保持標準 Subsection 的左側縮排 (3em)
+  {\addvspace{-0.3em}}                  %【目錄行距】與上面保持一致
+  {\thecontentslabel\ }                 % 保持原本的標號與間距（如：1.1.1 ）
+  {}
+  {\titlerule*[0.35pc]{.}\contentspage} %【點點間距】務必與上面保持一致
+  []
+\titlecontents{subsubsection}[4.5em]    % 保持標準 Subsubsection 的左側縮排 (4.5em)  
+  {\addvspace{-0.3em}}                  %【目錄行距】與上面保持一致
+  {\thecontentslabel\ }                 % 保持原本的標號與間距（如：1.1.1.1 ）
+  {}
+  {\titlerule*[0.35pc]{.}\contentspage} 
+  []
+
+\titlecontents{figure}[0pt]             % 編號的左側縮排空間對齊章節縮排
+  {\addvspace{-0.3em}}                  % 保持與主目錄完全相同的固定等間距
+  {圖~\thecontentslabel\ }              % 保持原本的圖編號格式
+  {}
+  {\titlerule*[0.35pc]{.}\contentspage} 
+  []
+
+\titlecontents{table}[0pt]              % 編號的左側縮排空間對齊章節縮排
+  {\addvspace{-0.3em}}                  % 保持與主目錄完全相同的固定等間距
+  {表~\thecontentslabel\ }              % 保持原本的表編號格式
+  {}
+  {\titlerule*[0.35pc]{.}\contentspage} 
+  []
+
+
+% =====================================================================
+% 7. 圖表標題與雲科大專屬編號修改 (放於 hyperref 之前)
+% =====================================================================
+% 把所有 Figure caption 後的冒號給取消掉
+% 參考https://www.ptt.cc/bbs/LaTeX/M.1186468410.A.476.html
+\usepackage{caption}
+\DeclareCaptionLabelSeparator{colon}{  }
+
+% 將論文中的「表」、「圖」、「數學式」的編號格式，從預設的「小數點（.）」改為「連字號（-）」
+\renewcommand\thetable{\arabic{chapter}-\arabic{table}}
+\renewcommand\thefigure{\arabic{chapter}-\arabic{figure}}
+% \renewcommand\theequation{\arabic{chapter}-\arabic{equation}}
+
+
+% =====================================================================
+% 8. 頁首頁尾與浮水印設定
+% =====================================================================
+\usepackage{fancyhdr}   % 借用增強功能型 header 套件來擺放浮水印 
+                        % (佔用了 central header)
+                        % 不需要浮水印的使用者仍可利用此套件，產生所需的 header, footer
 % 啟動 fancy header/footer 套件
 \pagestyle{fancy}
-\fancyhead{}  % reset left, central, right header to empty
-\fancyfoot[C]{\thepage} %中間 footer 擺放頁碼
+\fancyhead{}            % reset left, central, right header to empty
+\fancyfoot[C]{\thepage} % 中間 footer 擺放頁碼
 \renewcommand{\headrulewidth}{0pt} % header 的直線; 0pt 則無線
 
-% 如果不需要任何浮水印，則請把下列介於 >>> 與 <<< 之間
-% 的文字行關掉 (行首加上百分號)
-%% 浮水印 >>> 
-%7/23
+% 如果不需要任何浮水印，則請把下列介於 >>> 與 <<< 之間的文字行關掉 (行首加上百分號)
+% >>> 浮水印 
 \input{watermark/nyust_watermark.tex}
-%% <<< 浮水印
+% <<< 浮水印
 
 
+% =====================================================================
+% 9. 版面與全域規格設定
+% =====================================================================
+\geometry{verbose,a4paper,tmargin=3cm,bmargin=3cm,lmargin=3cm,rmargin=3cm}
 
-% global page layout
-\newcommand{\mybaselinestretch}{1.4}  %行距 1.5 倍 + 20%, (約為 double space)
-\renewcommand{\baselinestretch}{\mybaselinestretch}  % 論文行距預設值
-\parskip=2ex  % 段落之間的間隔為兩個 x 的高度
-\parindent = 24Pt  % 段首內縮由 CJK 控制，所以這裡就設成不內縮
+\newcommand{\mybaselinestretch}{1.5}                %行距 1.5 倍 + 20%, (約為 double space)
+\renewcommand{\baselinestretch}{\mybaselinestretch} % 論文行距預設值
+\parskip=2ex        % 段落之間的間隔為兩個 x 的高度
+\parindent=24Pt     % 段首內縮由 CJK 控制，所以這裡就設成不內縮
 
-% ==========================================
-% [新增] 使用者自訂全域字體設定
-% ==========================================
-
-% 1. 設定章節標題大小 (Chapter=18pt, Section=14pt, Subsection=12pt)
+% 設定章節標題字體大小 (Chapter=14pt, Section=14pt, Subsection=14pt)
 \ctexset{
     chapter = {
-        format = \centering\bfseries\fontsize{18}{24}\selectfont,
+        format = \centering\bfseries\fontsize{14}{20}\selectfont,
         beforeskip = 1em,
         afterskip = 3em,
         fixskip = true,
     },
     section = {
-        format = \bfseries\fontsize{14}{20}\selectfont, % 這裡就是你要的 14pt
+        format = \bfseries\fontsize{14}{20}\selectfont, 
         beforeskip = 0.2em,
         afterskip = 0.2em,
     },
     subsection = {
-        format = \bfseries\fontsize{14}{20}\selectfont, % 這裡設為 12pt (粗體)
+        format = \bfseries\fontsize{14}{20}\selectfont, 
+        beforeskip = 0.2em,
+        afterskip = 0.2em,
+    },
+    subsubsection = {
+        format = \bfseries\fontsize{14}{20}\selectfont, 
         beforeskip = 0.2em,
         afterskip = 0.2em,
     }
 }
 
-% 2. 設定全域內文為 12pt
+% 設定全域內文為 12pt
 % 使用 \AtBeginDocument 確保這些設定在 \begin{document} 之後立即生效
 % 這樣就不會被 Document Class 的預設值覆蓋
 \AtBeginDocument{
     \fontsize{12}{18}\selectfont
 }
+
+
+% =====================================================================
+% 10. 超連結與書籤 (必須排在所有圖表/公式套件後)
+% =====================================================================
+\usepackage[
+        hidelinks,			        % 隱藏所有連結
+			  plainpages=false,       % 確保羅馬數字 i 不會跟阿拉伯數字 1 搞混
+    		pdfpagelabels,          % 讓PDF閱讀器顯示正確的頁碼標籤
+			  bookmarksnumbered=true, % 開啟書籤編號
+		    ]{hyperref}
+\usepackage[all]{hypcap}    % 圖、表的目錄連結跳轉至圖片、表格上方，非原本預設的文字區域
+\usepackage{bookmark}	      % 產生PDF頁籤(大綱)
+
+
+% =====================================================================
+% 11. 自動交叉引用中文化 (必須在 hyperref 之後載入)
+% =====================================================================
+\usepackage{cleveref}       % 自動加上「圖」、「表」、「式」等字眼
+% === cleveref 繁體中文化設定 ===
+% 說明：#1 代表編號本身，#2 和 #3 則是包覆跳轉超連結的隱形標記
+\crefformat{chapter}{第#2#1#3章}
+\crefformat{section}{第#2#1#3節}
+\crefformat{subsection}{第#2#1#3小節}
+\crefformat{figure}{圖~#2#1#3~}
+\crefformat{table}{表~#2#1#3~}
+\crefformat{equation}{式(#2#1#3)}
+\crefformat{appendix}{附錄~#2#1#3~}
+% 為了相容大寫指令 \Cref (中文無大小寫之分，設定成一樣即可)
+\Crefformat{chapter}{第#2#1#3章}
+\Crefformat{section}{第#2#1#3節}
+\Crefformat{subsection}{第#2#1#3小節}
+\Crefformat{figure}{圖~#2#1#3~}
+\Crefformat{table}{表~#2#1#3~}
+\Crefformat{equation}{式(#2#1#3)}
+\Crefformat{appendix}{附錄~#2#1#3~}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  end of preamble
