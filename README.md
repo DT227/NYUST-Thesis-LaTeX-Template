@@ -177,6 +177,7 @@ _National Yunlin University of Science & Technology_
         - Win10: 設定→系統→選用功能→上方新增功能→搜尋中文(簡體)補充字型→勾選並新增即可
     - 其他環境則需要自行下載安裝相關字型
         - DengXian(等线)、FangSong(仿宋)、KaiTi(楷体)、SimHei(中易黑体)等簡中字體，具體需要哪些請查閱[ctex字體定義文件](https://zhuanlan.zhihu.com/p/538459335)
+        - 或是直接安裝此範本fonts資料夾中zh-cn的字體
 7. 到此前置作業基本上就完成了，可以開始論文的編輯嘞~~🎉
 
 以上設定參考自[[1]](https://hackmd.io/@DextinChen/VSCode-LaTeX-setting)、[[2]](https://kuaz.info/posts/2023/01/latex-tutorial-part-ctex/)、[[3]](https://zhuanlan.zhihu.com/p/521256466)
@@ -197,6 +198,8 @@ NYUST-Thesis-LaTeX-Template
 ├─ figures
 │  └─ CH1~CH6的圖片資料夾
 │     └─ 各章要插入的圖片檔案   //放置圖片
+├─ fonts
+│  └─ 各語系之字體
 ├─ frontpages
 │  ├─ my_ackn.tex           //誌謝
 │  ├─ my_cabstract.tex      //中文摘要
