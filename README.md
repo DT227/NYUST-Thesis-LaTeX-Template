@@ -7,7 +7,7 @@
 _Unofficial LaTeX template for your master/doctor thesis at_  
 _National Yunlin University of Science & Technology_
 
-[![NYUST-Thesis-Template](https://img.shields.io/badge/NYUST_Thesis_Template-gray?logo=github)](https://github.com/DT227/Master-Thesis/tree/main)
+[![NYUST-Thesis-Template](https://img.shields.io/badge/NYUST_Thesis_Template-gray?logo=github)](https://github.com/DT227/NYUST-Thesis-LaTeX-Template)
 [![License](https://img.shields.io/badge/License-CC_BY--SA_4.0-blue)](https://creativecommons.org/licenses/by-sa/4.0/ "創用CC 姓名標示-相同方式分享 4.0 國際 授權條款")
 </div>
 
